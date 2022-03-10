@@ -1,0 +1,27 @@
+<form class="mb-2" (ngSubmit)="agregarItem()">
+    <div class="input-group overflow-auto">
+        <input 
+            type="text" 
+            class="form-control" 
+            placeholder="Item:" 
+            name="item"
+            [(ngModel)]="item"
+        >
+        <button class="btn btn-outline-secondary" type="submit">Agregar</button>
+    </div>
+</form>
+
+<ul class="border rounded shadow-sm list-group list-group-flush overflow-auto" style="height: 500px;">
+    <div *ngIf="items.length === 0">
+        <li class="list-group-item">
+            <p> No hay items </p>
+        </li>
+    </div>
+    <li class="list-group-item d-flex justify-content-between gap-3" *ngFor="let item of items; let i = index">
+        <p>{{ item }}</p>
+        <button 
+            class="btn btn-danger"
+            (click)="eliminarItem(i)"
+        >Borrar</button>
+    </li>
+</ul>
