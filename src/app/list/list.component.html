@@ -1,27 +1,37 @@
-<form class="mb-2" (ngSubmit)="agregarItem()">
+<form (ngSubmit)="agregarItem()" class="mb-2" [formGroup]="formulario">
+    <span class="form-text text-danger" *ngIf="validarCampos('item')">
+        Item no puede estar vacio y debe ser mayor a 5 caracteres.
+    </span>
     <div class="input-group overflow-auto">
-        <input 
-            type="text" 
-            class="form-control" 
-            placeholder="Item:" 
-            name="item"
-            [(ngModel)]="item"
+        <input
+            type="text"
+            class="form-control"
+            formControlName="item"
+            placeholder="Item"
+        />
+        <button
+            class="btn btn-outline-secondary"
+            type="submit"
         >
-        <button class="btn btn-outline-secondary" type="submit">Agregar</button>
+            Agregar
+        </button>
     </div>
 </form>
 
-<ul class="border rounded shadow-sm list-group list-group-flush overflow-auto" style="height: 500px;">
+<ul
+    class="border rounded shadow-sm list-group list-group-flush overflow-auto"
+    style="height: 500px"
+>
     <div *ngIf="items.length === 0">
         <li class="list-group-item">
-            <p> No hay items </p>
+            <p>No hay items</p>
         </li>
     </div>
-    <li class="list-group-item d-flex justify-content-between gap-3" *ngFor="let item of items; let i = index">
+    <li
+        class="list-group-item d-flex justify-content-between gap-3"
+        *ngFor="let item of items; let i = index"
+    >
         <p>{{ item }}</p>
-        <button 
-            class="btn btn-danger"
-            (click)="eliminarItem(i)"
-        >Borrar</button>
+        <button class="btn btn-danger" (click)="eliminarItem(i)">Borrar</button>
     </li>
 </ul>
